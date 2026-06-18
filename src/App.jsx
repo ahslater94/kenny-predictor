@@ -100,8 +100,14 @@ export default function App() {
   const resultsIn   = matches.filter(m=>m.actual_a!==null&&m.actual_a!==undefined).length;
   const isEngland   = theme==='england';
 
+  // Apply background to full page to avoid white side lines
+  useEffect(() => {
+    document.body.style.background = C.bg;
+    document.body.style.color = C.text;
+  }, [C.bg, C.text]);
+
   return (
-    <div style={{maxWidth:820,margin:'0 auto',padding:'0 14px 80px',fontFamily:'Inter,system-ui,sans-serif',background:C.bg,color:C.text,minHeight:'100vh'}}>
+    <div style={{maxWidth:820,margin:'0 auto',padding:'0 14px 80px',fontFamily:'Inter,system-ui,sans-serif',color:C.text,minHeight:'100vh'}}>
 
       {/* Header */}
       <header style={{textAlign:'center',padding:'28px 0 0',background:isEngland?'linear-gradient(180deg,#001c58,#001133)':'linear-gradient(180deg,#0d1f11,#07120a)',marginBottom:0}}>
