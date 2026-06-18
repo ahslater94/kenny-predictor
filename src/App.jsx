@@ -139,7 +139,7 @@ export default function App() {
             letterSpacing:'0.02em',
             boxShadow:`0 0 0 1px ${C.accent}22`,
           }}>
-          {isEngland ? '🌿 Switch to Green Theme' : '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Switch to England Theme'}
+          {isEngland ? '🟢 Switch to Green Theme' : '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Switch to England Theme'}
         </button>
       </div>
 
