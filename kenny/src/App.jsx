@@ -22,6 +22,8 @@ const FLAGS = {
 const fl = t => FLAGS[t] || '🏳️';
 const MEDALS = ['🥇','🥈','🥉'];
 
+const THEME_KEY = 'kenny_theme';
+
 function loadCache() {
   try { return JSON.parse(localStorage.getItem(CACHE_KEY)) || null; } catch { return null; }
 }
@@ -137,6 +139,14 @@ export default function App() {
   const [loading, setLoading] = useState(!loadCache());
   const [expanded, setExpanded] = useState(null);
   const [synced, setSynced] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem(THEME_KEY) || 'england'; } catch { return 'england'; }
+  });
+
+  useEffect(() => {
+    document.body.className = theme === 'england' ? 'england' : '';
+    try { localStorage.setItem(THEME_KEY, theme); } catch {}
+  }, [theme]);
 
   const groupTables = calcGroupTables(matches);
 
@@ -189,7 +199,12 @@ export default function App() {
           <span className={`sync-dot${synced ? '' : ' off'}`} />
           {resultsIn} results in · {KENNY_PLAYERS.length} players
         </span>
-        <button className="btn btn-outline btn-sm" onClick={loadData}>↻ Refresh</button>
+        <div style={{ display:'flex', gap:6, alignItems:'center' }}>
+          <button className="btn btn-outline btn-sm" onClick={() => setTheme(t => t === 'england' ? 'default' : 'england')}>
+            {theme === 'england' ? '🌿 Green' : '🏴󠁧󠁢󠁥󠁮󠁧󠁿 England'}
+          </button>
+          <button className="btn btn-outline btn-sm" onClick={loadData}>↻</button>
+        </div>
       </div>
 
       <div className="tabs">
