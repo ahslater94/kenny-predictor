@@ -136,7 +136,7 @@ export default function App() {
     subtext: { color:C.textDim, fontSize:'0.76rem', marginTop:6, textTransform:'uppercase', letterSpacing:'0.08em', fontWeight:500 },
     bar:     { height:4, background:C.accent, marginTop:20, width:'100%' },
     toggleWrap: { display:'flex', justifyContent:'flex-end', alignItems:'center', padding:'12px 0 4px', gap:8 },
-    toggleBtn: { padding:'8px 18px', borderRadius:20, border:`2px solid ${C.accent}`, background:'transparent', color:C.text, fontWeight:700, fontSize:'0.82rem', cursor:'pointer', fontFamily:'inherit', letterSpacing:'0.02em', transition:'all 0.15s' },
+    toggleBtn: { padding:'8px 18px', borderRadius:20, border:'none', background:C.accent, color:'#fff', fontWeight:700, fontSize:'0.82rem', cursor:'pointer', fontFamily:'inherit', letterSpacing:'0.02em' },
     sessionBar: { display:'flex', justifyContent:'space-between', alignItems:'center', background:C.surface, border:`1px solid ${C.border}`, borderRadius:10, padding:'9px 14px', marginBottom:14, fontSize:'0.82rem', color:C.textDim },
     tabs:    { display:'flex', gap:3, background:C.surface, border:`1px solid ${C.border}`, borderRadius:12, padding:4, marginBottom:20 },
     tab:     (on) => ({ flex:1, padding:'10px 4px', border:'none', borderRadius:9, background: on ? C.tabOn : 'transparent', color: on ? (isEngland?'#fff':C.accent) : C.textDim, fontWeight:600, fontSize:'0.8rem', cursor:'pointer', fontFamily:'inherit' }),
@@ -162,18 +162,15 @@ export default function App() {
         <div style={s.bar} />
       </header>
 
-      {/* Theme toggle */}
-      <div style={s.toggleWrap}>
-        <span style={{ fontSize:'0.76rem', color:C.textDim }}>Theme:</span>
-        <button style={s.toggleBtn} onClick={toggleTheme}>
-          {isEngland ? '🌿 Switch to Green' : '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Switch to England'}
-        </button>
-      </div>
-
-      {/* Session bar */}
+      {/* Session bar with toggle */}
       <div style={s.sessionBar}>
         <span><span style={s.syncDot} />{resultsIn} results in · {KENNY_PLAYERS.length} players</span>
-        <button style={s.refreshBtn} onClick={loadData}>↻ Refresh</button>
+        <div style={{ display:'flex', gap:8, alignItems:'center' }}>
+          <button style={s.toggleBtn} onClick={toggleTheme}>
+            {isEngland ? '🌿 Green' : '🏴󠁧󠁢󠁥󠁮󠁧󠁿 England'}
+          </button>
+          <button style={s.refreshBtn} onClick={loadData}>↻</button>
+        </div>
       </div>
 
       {/* Tabs */}
