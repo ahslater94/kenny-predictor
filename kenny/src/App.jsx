@@ -188,23 +188,38 @@ export default function App() {
   return (
     <div className="wrap">
       <header className="app-header">
-        <div className="eng-flags">🏴󠁧󠁢󠁥󠁮󠁧󠁿 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🏴󠁧󠁢󠁥󠁮󠁧󠁿</div>
+        {theme === 'england' && <div className="eng-flags">🏴󠁧󠁢󠁥󠁮󠁧󠁿 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🏴󠁧󠁢󠁥󠁮󠁧󠁿</div>}
         <h1>⚽ Kenny's World Cup <span>2026</span></h1>
-        <p>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Three Lions Edition · {KENNY_PLAYERS.length} Players 🏴󠁧󠁢󠁥󠁮󠁧󠁿</p>
+        <p>{theme === 'england' ? '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Three Lions Edition · ' + KENNY_PLAYERS.length + ' Players 🏴󠁧󠁢󠁥󠁮󠁧󠁿' : KENNY_PLAYERS.length + ' Players · World Cup 2026'}</p>
         <div className="eng-bar" />
       </header>
+
+      {/* Theme toggle — prominent at top */}
+      <div style={{ display:'flex', justifyContent:'center', margin:'0 0 14px' }}>
+        <button
+          onClick={() => setTheme(t => t === 'england' ? 'default' : 'england')}
+          style={{
+            padding: '10px 24px',
+            borderRadius: 10,
+            border: theme === 'england' ? '2px solid #CF111A' : '2px solid #2a5230',
+            background: theme === 'england' ? '#001c58' : '#0d1f11',
+            color: '#fff',
+            fontWeight: 700,
+            fontSize: '0.88rem',
+            cursor: 'pointer',
+            fontFamily: 'inherit',
+            letterSpacing: '0.02em',
+          }}>
+          {theme === 'england' ? '🌿 Switch to Green Theme' : '🏴󠁧󠁢󠁥󠁮󠁧󠁿 Switch to England Theme'}
+        </button>
+      </div>
 
       <div className="session-bar">
         <span>
           <span className={`sync-dot${synced ? '' : ' off'}`} />
           {resultsIn} results in · {KENNY_PLAYERS.length} players
         </span>
-        <div style={{ display:'flex', gap:6, alignItems:'center' }}>
-          <button className="btn btn-outline btn-sm" onClick={() => setTheme(t => t === 'england' ? 'default' : 'england')}>
-            {theme === 'england' ? '🌿 Green' : '🏴󠁧󠁢󠁥󠁮󠁧󠁿 England'}
-          </button>
-          <button className="btn btn-outline btn-sm" onClick={loadData}>↻</button>
-        </div>
+        <button className="btn btn-outline btn-sm" onClick={loadData}>↻</button>
       </div>
 
       <div className="tabs">
